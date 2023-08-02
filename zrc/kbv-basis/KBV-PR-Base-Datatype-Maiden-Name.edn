@@ -1,0 +1,10 @@
+{ns kbv-basis.KBV-PR-Base-Datatype-Maiden-Name,
+ import #{zen.fhir},
+ schema {:zen.fhir/version "0.6.30-7",
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Datatype_Maiden_Name",
+         :require #{:family :use},
+         :type zen/map,
+         :keys {:use {:match "maiden"},
+                :text {:zen/desc "Vollständiger Name"}},
+         :zen.fhir/type "HumanName"}}

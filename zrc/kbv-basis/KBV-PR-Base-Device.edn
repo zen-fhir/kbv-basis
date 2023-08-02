@@ -1,0 +1,53 @@
+{ns kbv-basis.KBV-PR-Base-Device,
+ import #{hl7-fhir-r4-core.Device
+          zen.fhir
+          hl7-fhir-r4-core.RelatedPerson
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.DeviceDefinition
+          hl7-fhir-r4-core.Practitioner
+          hl7-fhir-r4-core.Organization},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{hl7-fhir-r4-core.Device/schema zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Device",
+         :require #{:type},
+         :type zen/map,
+         :zen/desc "Dieses Profil bildet ein Gerät ab.",
+         :keys {:patient {:confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema}}},
+                :definition {:type zen/map,
+                             :require #{:reference},
+                             :confirms #{zen.fhir/Reference},
+                             :zen.fhir/reference {:refers #{hl7-fhir-r4-core.DeviceDefinition/schema}}},
+                :serialNumber {:zen/desc "Seriennummer"},
+                :modelNumber {:zen/desc "Modellnummer"},
+                :type {:type zen/map,
+                       :keys {:coding {:type zen/vector,
+                                       :slicing {:slices {"snomed" {:schema {:type zen/vector,
+                                                                             :every {:type zen/map,
+                                                                                     :require #{:system
+                                                                                                :code
+                                                                                                :display
+                                                                                                :version}}},
+                                                                    :filter {:engine :match,
+                                                                             :match {:system "http://snomed.info/sct"}}}}}}}},
+                :statusReason {:type zen/vector,
+                               :every {:type zen/map,
+                                       :keys {:coding {:type zen/vector,
+                                                       :every {:type zen/map,
+                                                               :require #{:system
+                                                                          :code}}}}}},
+                :note {:type zen/vector,
+                       :every {:type zen/map,
+                               :keys {:author {:fhir/polymorphic true,
+                                               :type zen/map,
+                                               :keys {:Reference {:confirms #{zen.fhir/Reference},
+                                                                  :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                                                                 hl7-fhir-r4-core.Organization/schema
+                                                                                                 hl7-fhir-r4-core.Practitioner/schema
+                                                                                                 hl7-fhir-r4-core.RelatedPerson/schema}}}}}}}},
+                :lotNumber {:zen/desc "Chargennummer"},
+                :verantwortlichePersonEinrichtung {:fhir/extensionUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Responsible_Person_Organization|1.4.0"},
+                :manufactureDate {:zen/desc "Herstellungsdatum"},
+                :expirationDate {:zen/desc "Haltbarkeitsdatum"}},
+         :zen.fhir/type "Device"}}

@@ -1,0 +1,65 @@
+{ns kbv-basis.KBV-PR-Base-Observation-Apgar-Score,
+ import #{hl7-fhir-r4-core.Device
+          hl7-fhir-r4-core.Observation
+          zen.fhir
+          hl7-fhir-r4-core.Group
+          hl7-fhir-r4-core.RelatedPerson
+          hl7-fhir-r4-core.Patient
+          kbv-basis.value-set.KBV-VS-Base-Apgar-Score-Value
+          hl7-fhir-r4-core.Practitioner
+          hl7-fhir-r4-core.Location
+          hl7-fhir-r4-core.Organization},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{hl7-fhir-r4-core.Observation/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Observation_Apgar_Score",
+         :require #{:effective :subject},
+         :type zen/map,
+         :zen/desc "Dieses Profil bildet einen Apgar-Score ab.",
+         :keys {:specimen {:confirms #{zen.fhir/Reference},
+                           :zen.fhir/reference {:refers #{}}},
+                :value {:fhir/polymorphic true,
+                        :type zen/map,
+                        :keys {:CodeableConcept {:type zen/map,
+                                                 :keys {:coding {:type zen/vector,
+                                                                 :every {:type zen/map,
+                                                                         :require #{:system
+                                                                                    :code
+                                                                                    :display
+                                                                                    :version},
+                                                                         :zen.fhir/value-set {:symbol kbv-basis.value-set.KBV-VS-Base-Apgar-Score-Value/value-set,
+                                                                                              :strength :required}},
+                                                                 :minItems 1,
+                                                                 :maxItems 1}},
+                                                 :require #{:coding}}}},
+                :component {:type zen/vector, :maxItems 0},
+                :note {:type zen/vector,
+                       :every {:type zen/map,
+                               :keys {:author {:fhir/polymorphic true,
+                                               :type zen/map,
+                                               :keys {:Reference {:confirms #{zen.fhir/Reference},
+                                                                  :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                                                                 hl7-fhir-r4-core.Organization/schema
+                                                                                                 hl7-fhir-r4-core.Practitioner/schema
+                                                                                                 hl7-fhir-r4-core.RelatedPerson/schema}}}}}}}},
+                :effective {:fhir/polymorphic true,
+                            :type zen/map,
+                            :require #{:dateTime}},
+                :code {:type zen/map,
+                       :keys {:coding {:type zen/vector,
+                                       :slicing {:slices {}},
+                                       :minItems 2}},
+                       :require #{:coding}},
+                :focus {:type zen/vector,
+                        :every {:confirms #{zen.fhir/Reference},
+                                :zen.fhir/reference {:refers #{}}},
+                        :maxItems 0},
+                :device {:confirms #{zen.fhir/Reference},
+                         :zen.fhir/reference {:refers #{}}},
+                :subject {:confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                         hl7-fhir-r4-core.Device/schema
+                                                         hl7-fhir-r4-core.Location/schema
+                                                         hl7-fhir-r4-core.Group/schema}}}},
+         :zen.fhir/type "Observation"}}

@@ -1,0 +1,26 @@
+{ns kbv-basis.KBV-PR-Base-PractitionerRole,
+ import #{zen.fhir
+          hl7-fhir-r4-core.PractitionerRole
+          hl7-fhir-r4-core.Practitioner
+          hl7-fhir-r4-core.Organization},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{hl7-fhir-r4-core.PractitionerRole/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_PractitionerRole",
+         :require #{:organization :practitioner},
+         :type zen/map,
+         :zen/desc "Dieses Profil bildet eine temporäre Rolle einer behandelnden Person in Bezug zu einer Einrichtung ab.",
+         :keys {:practitioner {:confirms #{zen.fhir/Reference},
+                               :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Practitioner/schema}}},
+                :organization {:confirms #{zen.fhir/Reference},
+                               :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Organization/schema}}},
+                :code {:type zen/vector,
+                       :every {:type zen/map,
+                               :keys {:coding {:type zen/vector,
+                                               :slicing {:slices {}}}}}},
+                :specialty {:type zen/vector,
+                            :every {:type zen/map,
+                                    :keys {:coding {:type zen/vector,
+                                                    :slicing {:slices {}}}}}}},
+         :zen.fhir/type "PractitionerRole"}}

@@ -1,0 +1,98 @@
+{ns kbv-basis.KBV-PR-Base-Condition-Diagnosis,
+ import #{hl7-fhir-r4-core.Condition
+          zen.fhir
+          hl7-fhir-r4-core.Group
+          hl7-fhir-r4-core.RelatedPerson
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.Practitioner
+          hl7-fhir-r4-core.condition-assertedDate
+          hl7-fhir-r4-core.Organization},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4-core.Condition/schema},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Condition_Diagnosis",
+         :require #{:code},
+         :type zen/map,
+         :zen/desc "Dieses Profil bildet relevante Informationen zu einer Diagnosestellung ab.",
+         :keys {:onset {:fhir/polymorphic true,
+                        :type zen/map,
+                        :keys {:dateTime {:zen/desc "Datum Anfang"},
+                               :Age {:type zen/map,
+                                     :keys {:lebensphase-von {:fhir/extensionUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Stage_Life|1.4.0"}},
+                                     :zen/desc "Lebenphase von"}},
+                        :zen/desc "Klinisch relevanter Zeitraum Anfang"},
+                :abatement {:fhir/polymorphic true,
+                            :type zen/map,
+                            :keys {:dateTime {:zen/desc "Datum bis"},
+                                   :Age {:type zen/map,
+                                         :keys {:lebensphase-bis {:fhir/extensionUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Stage_Life|1.4.0"}},
+                                         :zen/desc "Lebenphase bis"}},
+                            :zen/desc "Klinischer Zeitraum Ende"},
+                :note {:type zen/vector,
+                       :every {:type zen/map,
+                               :keys {:author {:fhir/polymorphic true,
+                                               :type zen/map,
+                                               :keys {:Reference {:confirms #{zen.fhir/Reference},
+                                                                  :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                                                                 hl7-fhir-r4-core.Organization/schema
+                                                                                                 hl7-fhir-r4-core.Practitioner/schema
+                                                                                                 hl7-fhir-r4-core.RelatedPerson/schema}}}}}},
+                               :zen/desc "Freitextbeschreibung"}},
+                :recordedDate {:zen/desc "Dokumentationsdatum"},
+                :Feststellungsdatum {:confirms #{hl7-fhir-r4-core.condition-assertedDate/schema},
+                                     :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/condition-assertedDate",
+                                     :zen/desc "Feststellungsdatum"},
+                :severity {:type zen/map,
+                           :keys {:coding {:type zen/vector,
+                                           :slicing {:slices {"snomed" {:schema {:type zen/vector,
+                                                                                 :maxItems 1,
+                                                                                 :every {:type zen/map,
+                                                                                         :require #{:system
+                                                                                                    :code}}},
+                                                                        :filter {:engine :match,
+                                                                                 :match {:system "http://snomed.info/sct"}}}}}}},
+                           :zen/desc "Schweregrad der Diagnose"},
+                :code {:type zen/map,
+                       :keys {:coding {:type zen/vector,
+                                       :slicing {:slices {"snomed" {:schema {:type zen/vector,
+                                                                             :maxItems 1,
+                                                                             :every {:type zen/map,
+                                                                                     :keys {:system {:const {:value "http://snomed.info/sct"}}},
+                                                                                     :require #{:system
+                                                                                                :code
+                                                                                                :version}}},
+                                                                    :filter {:engine :match,
+                                                                             :match {:system "http://snomed.info/sct"}}},
+                                                          "orphanet" {:schema {:type zen/vector,
+                                                                               :maxItems 1,
+                                                                               :every {:type zen/map,
+                                                                                       :keys {:system {:const {:value "http://www.orpha.net"}}},
+                                                                                       :require #{:system
+                                                                                                  :code}}},
+                                                                      :filter {:engine :match,
+                                                                               :match {:system "http://www.orpha.net"}}}}},
+                                       :minItems 1},
+                              :text {:zen/desc "Diagnoseerläuterung"}},
+                       :require #{:coding}},
+                :bodySite {:type zen/vector,
+                           :every {:type zen/map,
+                                   :keys {:coding {:type zen/vector,
+                                                   :slicing {:slices {"snomed" {:schema {:type zen/vector,
+                                                                                         :minItems 1,
+                                                                                         :maxItems 1,
+                                                                                         :every {:type zen/map,
+                                                                                                 :keys {:system {:match "http://snomed.info/sct"}},
+                                                                                                 :require #{:system
+                                                                                                            :code
+                                                                                                            :display
+                                                                                                            :version}}},
+                                                                                :filter {:engine :match,
+                                                                                         :match {:system "http://snomed.info/sct"}}}}},
+                                                   :minItems 1}},
+                                   :require #{:coding},
+                                   :zen/desc "Körperstelle"}},
+                :subject {:confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                         hl7-fhir-r4-core.Group/schema}}}},
+         :zen.fhir/type "Condition"}}

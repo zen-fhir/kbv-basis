@@ -1,0 +1,88 @@
+{ns kbv-basis.KBV-PR-Base-Procedure,
+ import #{hl7-fhir-r4-core.Device
+          hl7-fhir-r4-core.Observation
+          hl7-fhir-r4-core.Condition
+          zen.fhir
+          hl7-fhir-r4-core.Group
+          hl7-fhir-r4-core.RelatedPerson
+          hl7-fhir-r4-core.DiagnosticReport
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.PractitionerRole
+          de-basisprofil-r4.ProzedurDokumentationsdatum
+          hl7-fhir-r4-core.Practitioner
+          hl7-fhir-r4-core.Procedure
+          hl7-fhir-r4-core.DocumentReference
+          hl7-fhir-r4-core.Organization},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{hl7-fhir-r4-core.Procedure/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Procedure",
+         :require #{:performed :code},
+         :type zen/map,
+         :zen/desc "Dieses Profil bildet eine Prozedur ab.",
+         :keys {:category {:type zen/map,
+                           :keys {:coding {:type zen/vector,
+                                           :slicing {:slices {"snomed" {:schema {:type zen/vector,
+                                                                                 :every {:type zen/map,
+                                                                                         :require #{:system
+                                                                                                    :code
+                                                                                                    :display
+                                                                                                    :version}}},
+                                                                        :filter {:engine :match,
+                                                                                 :match {:system "http://snomed.info/sct"}}}}}}}},
+                :focalDevice {:type zen/vector,
+                              :every {:type zen/map,
+                                      :keys {:manipulated {:confirms #{zen.fhir/Reference},
+                                                           :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Device/schema}}}}}},
+                :complicationDetail {:type zen/vector,
+                                     :every {:confirms #{zen.fhir/Reference},
+                                             :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Condition/schema}}}},
+                :performed {:fhir/polymorphic true,
+                            :type zen/map,
+                            :keys {:Age {:type zen/map,
+                                         :keys {:Lebensphase {:fhir/extensionUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Stage_Life|1.4.0"}}}}},
+                :note {:type zen/vector,
+                       :every {:type zen/map,
+                               :keys {:author {:fhir/polymorphic true,
+                                               :type zen/map,
+                                               :keys {:Reference {:confirms #{zen.fhir/Reference},
+                                                                  :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                                                                 hl7-fhir-r4-core.Organization/schema
+                                                                                                 hl7-fhir-r4-core.Practitioner/schema
+                                                                                                 hl7-fhir-r4-core.RelatedPerson/schema}}}}}}}},
+                :recorder {:confirms #{zen.fhir/Reference},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                          hl7-fhir-r4-core.PractitionerRole/schema
+                                                          hl7-fhir-r4-core.Practitioner/schema
+                                                          hl7-fhir-r4-core.RelatedPerson/schema}}},
+                :code {:type zen/map,
+                       :keys {:coding {:type zen/vector,
+                                       :slicing {:slices {"ops" {:schema {:type zen/vector,
+                                                                          :maxItems 1,
+                                                                          :every {:type zen/map,
+                                                                                  :require #{:display}}},
+                                                                 :filter {:engine :match,
+                                                                          :match {:system "http://fhir.de/CodeSystem/bfarm/ops"}}}}}}}},
+                :Dokumentationsdatum {:confirms #{de-basisprofil-r4.ProzedurDokumentationsdatum/schema},
+                                      :fhir/extensionUri "http://fhir.de/StructureDefinition/ProzedurDokumentationsdatum"},
+                :subject {:confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                         hl7-fhir-r4-core.Group/schema}}},
+                :performer {:type zen/vector,
+                            :every {:type zen/map,
+                                    :keys {:actor {:confirms #{zen.fhir/Reference},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                                                  hl7-fhir-r4-core.PractitionerRole/schema
+                                                                                  hl7-fhir-r4-core.Organization/schema
+                                                                                  hl7-fhir-r4-core.Device/schema
+                                                                                  hl7-fhir-r4-core.Practitioner/schema
+                                                                                  hl7-fhir-r4-core.RelatedPerson/schema}}}}}},
+                :reasonReference {:type zen/vector,
+                                  :every {:confirms #{zen.fhir/Reference},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Observation/schema
+                                                                         hl7-fhir-r4-core.DocumentReference/schema
+                                                                         hl7-fhir-r4-core.Procedure/schema
+                                                                         hl7-fhir-r4-core.DiagnosticReport/schema
+                                                                         hl7-fhir-r4-core.Condition/schema}}}}},
+         :zen.fhir/type "Procedure"}}

@@ -1,0 +1,67 @@
+{ns kbv-basis.KBV-PR-Base-Observation-Peripheral-Oxygen-Saturation,
+ import #{zen.fhir
+          hl7-fhir-r4-core.Group
+          hl7-fhir-r4-core.RelatedPerson
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.Practitioner
+          hl7-fhir-r4-core.Organization},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Observation_Peripheral_Oxygen_Saturation",
+         :require #{:method},
+         :type zen/map,
+         :zen/desc "Dieses Profil beschreibt die Messung einer einzelnen peripheren arteriellen Sauerstoffsättigung.",
+         :keys {:code {:type zen/map,
+                       :keys {:coding {:type zen/vector,
+                                       :slicing {:slices {"loinc" {:schema {:type zen/vector,
+                                                                            :minItems 1,
+                                                                            :maxItems 1,
+                                                                            :every {:type zen/map,
+                                                                                    :require #{:system
+                                                                                               :code
+                                                                                               :display
+                                                                                               :version}}},
+                                                                   :filter {:engine :match,
+                                                                            :match {:system "http://loinc.org",
+                                                                                    :version "2.73",
+                                                                                    :code "2708-6",
+                                                                                    :display "Oxygen saturation in Arterial blood"}}},
+                                                          "snomed" {:schema {:type zen/vector,
+                                                                             :minItems 1,
+                                                                             :maxItems 1,
+                                                                             :every {:type zen/map,
+                                                                                     :require #{:system
+                                                                                                :code
+                                                                                                :display
+                                                                                                :version}}},
+                                                                    :filter {:engine :match,
+                                                                             :match {:system "http://snomed.info/sct",
+                                                                                     :version "http://snomed.info/sct/900000000000207008/version/20230131",
+                                                                                     :code "431314004",
+                                                                                     :display "Peripheral oxygen saturation (observable entity)"}}}}}}},
+                       :require #{:coding}},
+                :subject {:confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                         hl7-fhir-r4-core.Group/schema}}},
+                :value {:type zen/map, :keys {:unit {:match "%"}}},
+                :note {:type zen/map,
+                       :keys {:author {:fhir/polymorphic true,
+                                       :type zen/map,
+                                       :keys {:Reference {:confirms #{zen.fhir/Reference},
+                                                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                                                         hl7-fhir-r4-core.Organization/schema
+                                                                                         hl7-fhir-r4-core.Practitioner/schema
+                                                                                         hl7-fhir-r4-core.RelatedPerson/schema}}}}}}},
+                :method {:match {:coding #{{:system "http://snomed.info/sct",
+                                            :version "http://snomed.info/sct/900000000000207008/version/20230131",
+                                            :code "448703006",
+                                            :display "Pulse oximeter (physical object)"}}},
+                         :type zen/map,
+                         :keys {:coding {:type zen/map,
+                                         :require #{:system
+                                                    :code
+                                                    :display
+                                                    :version}}},
+                         :require #{:coding}}},
+         :zen.fhir/type "Observation"}}

@@ -1,0 +1,55 @@
+{ns kbv-basis.KBV-PR-Base-Observation-Pregnancy-Status,
+ import #{hl7-fhir-r4-core.Device
+          hl7-fhir-r4-core.Observation
+          zen.fhir
+          hl7-fhir-r4-core.Group
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.Location},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{hl7-fhir-r4-core.Observation/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Observation_Pregnancy_Status",
+         :require #{:value},
+         :type zen/map,
+         :zen/desc "Hier wird ein Schwangerschaftsstatus abgebldet.",
+         :keys {:code {:type zen/map,
+                       :keys {:coding {:type zen/vector,
+                                       :slicing {:slices {"loinc" {:schema {:type zen/vector,
+                                                                            :minItems 1,
+                                                                            :maxItems 1,
+                                                                            :every {:type zen/map,
+                                                                                    :require #{:system
+                                                                                               :code
+                                                                                               :display
+                                                                                               :version}}},
+                                                                   :filter {:engine :match,
+                                                                            :match {:system "http://loinc.org",
+                                                                                    :version "2.73",
+                                                                                    :code "11449-6",
+                                                                                    :display "Pregnancy status - Reported"}}}}},
+                                       :minItems 1}},
+                       :require #{:coding}},
+                :subject {:confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                         hl7-fhir-r4-core.Device/schema
+                                                         hl7-fhir-r4-core.Location/schema
+                                                         hl7-fhir-r4-core.Group/schema}}},
+                :focus {:type zen/vector,
+                        :every {:confirms #{zen.fhir/Reference},
+                                :zen.fhir/reference {:refers #{}}},
+                        :maxItems 0},
+                :effective {:fhir/polymorphic true, :type zen/map},
+                :value {:fhir/polymorphic true,
+                        :type zen/map,
+                        :exclusive-keys #{#{:CodeableConcept :boolean}},
+                        :keys {:CodeableConcept {:type zen/map,
+                                                 :keys {:coding {:type zen/vector,
+                                                                 :minItems 1}},
+                                                 :require #{:coding}}}},
+                :method {:type zen/map,
+                         :keys {:coding {:type zen/vector,
+                                         :slicing {:slices {}},
+                                         :minItems 1}},
+                         :require #{:coding}}},
+         :zen.fhir/type "Observation"}}

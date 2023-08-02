@@ -1,0 +1,23 @@
+{ns kbv-basis.KBV-EX-Base-Medication-Type,
+ import #{kbv-basis.value-set.KBV-VS-Base-Medication-Type
+          zen.fhir
+          hl7-fhir-r4-core.CodeableConcept},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+         :zen/tags #{zen.fhir/extension
+                     zen/schema
+                     zen.fhir/structure-schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Medication_Type",
+         :require #{:coding},
+         :type zen/map,
+         :keys {:coding {:type zen/vector,
+                         :every {:type zen/map,
+                                 :require #{:system
+                                            :code
+                                            :display
+                                            :version},
+                                 :zen.fhir/value-set {:symbol kbv-basis.value-set.KBV-VS-Base-Medication-Type/value-set,
+                                                      :strength :required}},
+                         :minItems 1,
+                         :maxItems 1}},
+         :zen.fhir/type "CodeableConcept"}}

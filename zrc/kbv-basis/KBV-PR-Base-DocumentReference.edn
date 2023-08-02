@@ -1,0 +1,54 @@
+{ns kbv-basis.KBV-PR-Base-DocumentReference,
+ import #{hl7-fhir-r4-core.Device
+          zen.fhir
+          hl7-fhir-r4-core.Group
+          hl7-fhir-r4-core.RelatedPerson
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.PractitionerRole
+          hl7-fhir-r4-core.Practitioner
+          hl7-fhir-r4-core.DocumentReference
+          hl7-fhir-r4-core.Organization},
+ schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen/desc "Hier kann auf ein externes Dokument verwiesen und/oder ein Dokument angehängt werden.",
+         :zen.fhir/type "DocumentReference",
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_DocumentReference",
+         :zen.fhir/version "0.6.30-7",
+         :confirms #{hl7-fhir-r4-core.DocumentReference/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:type {:type zen/map,
+                       :keys {:coding {:type zen/vector,
+                                       :slicing {:slices {"xds" {:schema {:type zen/vector,
+                                                                          :minItems 1,
+                                                                          :maxItems 1,
+                                                                          :every {:type zen/map,
+                                                                                  :require #{:system
+                                                                                             :code
+                                                                                             :display}}},
+                                                                 :filter {:engine :match,
+                                                                          :match {:system "http://ihe-d.de/CodeSystems/IHEXDStypeCode"}}}}}}}},
+                :category {:type zen/vector,
+                           :every {:type zen/map,
+                                   :keys {:coding {:type zen/vector,
+                                                   :slicing {:slices {"xds" {:schema {:type zen/vector,
+                                                                                      :minItems 1,
+                                                                                      :maxItems 1,
+                                                                                      :every {:type zen/map,
+                                                                                              :require #{:system
+                                                                                                         :code
+                                                                                                         :display}}},
+                                                                             :filter {:engine :match,
+                                                                                      :match {:system "http://ihe-d.de/CodeSystems/IHEXDSclassCode"}}}}}}}}},
+                :subject {:confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                         hl7-fhir-r4-core.Device/schema
+                                                         hl7-fhir-r4-core.Practitioner/schema
+                                                         hl7-fhir-r4-core.Group/schema}}},
+                :author {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                                hl7-fhir-r4-core.PractitionerRole/schema
+                                                                hl7-fhir-r4-core.Organization/schema
+                                                                hl7-fhir-r4-core.Device/schema
+                                                                hl7-fhir-r4-core.Practitioner/schema
+                                                                hl7-fhir-r4-core.RelatedPerson/schema}}}}}}}

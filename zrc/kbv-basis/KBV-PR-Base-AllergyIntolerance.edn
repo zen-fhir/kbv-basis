@@ -1,0 +1,96 @@
+{ns kbv-basis.KBV-PR-Base-AllergyIntolerance,
+ import #{zen.fhir
+          hl7-fhir-r4-core.RelatedPerson
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.AllergyIntolerance
+          hl7-fhir-r4-core.Practitioner
+          hl7-fhir-r4-core.Organization},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4-core.AllergyIntolerance/schema},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_AllergyIntolerance",
+         :require #{:code},
+         :type zen/map,
+         :zen/desc "Hier kann eine einzelne Allergie oder Unverträglichkeit abgebildet werden.",
+         :keys {:patient {:confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema}}},
+                :onset {:fhir/polymorphic true,
+                        :type zen/map,
+                        :keys {:dateTime {:zen/desc "Klinischer Zeitraum datiert \"von\""},
+                               :Age {:type zen/map,
+                                     :keys {:lebensphase-von {:fhir/extensionUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Stage_Life|1.4.0"}},
+                                     :zen/desc "Klinischer Zeitraum"}}},
+                :category {:type zen/vector, :maxItems 1},
+                :abatement-lebensphase-bis {:fhir/extensionUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Stage_Life|1.4.0",
+                                            :zen/desc "Lebensphase"},
+                :clinicalStatus {:type zen/map,
+                                 :keys {:coding {:type zen/vector,
+                                                 :every {:type zen/map,
+                                                         :require #{:system
+                                                                    :code
+                                                                    :display
+                                                                    :version}},
+                                                 :minItems 1,
+                                                 :maxItems 1}},
+                                 :require #{:coding}},
+                :abatement {:fhir/extensionUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_AllergyIntolerance_Abatement|1.4.0",
+                            :zen/desc "Klinisch relevantes Enddatum"},
+                :note {:type zen/vector,
+                       :every {:type zen/map,
+                               :keys {:author {:fhir/polymorphic true,
+                                               :type zen/map,
+                                               :keys {:Reference {:confirms #{zen.fhir/Reference},
+                                                                  :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                                                                 hl7-fhir-r4-core.Organization/schema
+                                                                                                 hl7-fhir-r4-core.Practitioner/schema
+                                                                                                 hl7-fhir-r4-core.RelatedPerson/schema}}}}}}},
+                       :maxItems 1},
+                :code {:type zen/map,
+                       :keys {:coding {:type zen/vector,
+                                       :slicing {:slices {"snomed" {:schema {:type zen/vector,
+                                                                             :every {:type zen/map,
+                                                                                     :require #{:system
+                                                                                                :code
+                                                                                                :display
+                                                                                                :version}}},
+                                                                    :filter {:engine :match,
+                                                                             :match {:system "http://snomed.info/sct"}}},
+                                                          "ask" {:schema {:type zen/vector,
+                                                                          :every {:type zen/map,
+                                                                                  :require #{:display
+                                                                                             :version}}},
+                                                                 :filter {:engine :match,
+                                                                          :match {:system "http://fhir.de/CodeSystem/ask"}}}}}}}},
+                :verificationStatus {:type zen/map,
+                                     :keys {:coding {:type zen/vector,
+                                                     :every {:type zen/map,
+                                                             :require #{:system
+                                                                        :code
+                                                                        :display
+                                                                        :version}},
+                                                     :minItems 1,
+                                                     :maxItems 1}},
+                                     :require #{:coding}},
+                :reaction {:type zen/vector,
+                           :every {:type zen/map,
+                                   :keys {:manifestation {:type zen/vector,
+                                                          :every {:type zen/map,
+                                                                  :keys {:coding {:type zen/vector,
+                                                                                  :slicing {:slices {"snomed" {:schema {:type zen/vector,
+                                                                                                                        :every {:type zen/map,
+                                                                                                                                :require #{:system
+                                                                                                                                           :code}}},
+                                                                                                               :filter {:engine :match,
+                                                                                                                        :match {:system "http://snomed.info/sct"}}}}}}}},
+                                                          :maxItems 1},
+                                          :exposureRoute {:type zen/map,
+                                                          :keys {:coding {:type zen/vector,
+                                                                          :slicing {:slices {"snomed" {:schema {:type zen/vector,
+                                                                                                                :maxItems 1,
+                                                                                                                :every {:type zen/map,
+                                                                                                                        :require #{:system
+                                                                                                                                   :code}}},
+                                                                                                       :filter {:engine :match,
+                                                                                                                :match {:system "http://snomed.info/sct"}}}}}}}}}}}},
+         :zen.fhir/type "AllergyIntolerance"}}

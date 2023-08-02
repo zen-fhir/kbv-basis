@@ -1,0 +1,25 @@
+{ns kbv-basis.KBV-EX-Base-Stage-Life,
+ import #{zen.fhir
+          kbv-basis.value-set.KBV-VS-Base-Stage-Life
+          hl7-fhir-r4-core.CodeableConcept},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+         :zen/tags #{zen.fhir/extension
+                     zen/schema
+                     zen.fhir/structure-schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Stage_Life",
+         :require #{:coding},
+         :type zen/map,
+         :zen/desc "Diese Extension dient der Angabe einer Lebensphase.",
+         :keys {:coding {:type zen/vector,
+                         :every {:type zen/map,
+                                 :keys {:system {:match "http://snomed.info/sct"}},
+                                 :require #{:system
+                                            :code
+                                            :display
+                                            :version},
+                                 :zen.fhir/value-set {:symbol kbv-basis.value-set.KBV-VS-Base-Stage-Life/value-set,
+                                                      :strength :required}},
+                         :minItems 1,
+                         :maxItems 1}},
+         :zen.fhir/type "CodeableConcept"}}

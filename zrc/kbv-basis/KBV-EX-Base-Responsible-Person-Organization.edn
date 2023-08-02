@@ -1,0 +1,22 @@
+{ns kbv-basis.KBV-EX-Base-Responsible-Person-Organization,
+ import #{zen.fhir
+          kbv-basis.KBV-PR-Base-Practitioner
+          hl7-fhir-r4-core.PractitionerRole
+          kbv-basis.KBV-PR-Base-PractitionerRole
+          hl7-fhir-r4-core.Practitioner
+          kbv-basis.KBV-PR-Base-Organization
+          hl7-fhir-r4-core.Organization},
+ schema {:zen/tags #{zen.fhir/extension
+                     zen/schema
+                     zen.fhir/structure-schema},
+         :zen/desc "Diese Extension dient der Referenz auf eine verantwortliche Person / Einrichtung.",
+         :zen.fhir/type "Reference",
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Responsible_Person_Organization",
+         :zen.fhir/version "0.6.30-7",
+         :confirms #{zen.fhir/Reference},
+         :zen.fhir/reference {:refers #{kbv-basis.KBV-PR-Base-Practitioner/schema
+                                        hl7-fhir-r4-core.PractitionerRole/schema
+                                        hl7-fhir-r4-core.Organization/schema
+                                        hl7-fhir-r4-core.Practitioner/schema
+                                        kbv-basis.KBV-PR-Base-PractitionerRole/schema
+                                        kbv-basis.KBV-PR-Base-Organization/schema}}}}

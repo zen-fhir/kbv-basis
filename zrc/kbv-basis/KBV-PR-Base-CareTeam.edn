@@ -1,0 +1,43 @@
+{ns kbv-basis.KBV-PR-Base-CareTeam,
+ import #{hl7-fhir-r4-core.CareTeam
+          zen.fhir
+          hl7-fhir-r4-core.Group
+          hl7-fhir-r4-core.RelatedPerson
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.PractitionerRole
+          hl7-fhir-r4-core.Practitioner
+          hl7-fhir-r4-core.Organization},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{hl7-fhir-r4-core.CareTeam/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_CareTeam",
+         :require #{:participant :subject},
+         :type zen/map,
+         :zen/desc "Dieses Profil bildet ein Versorgungsteam ab.",
+         :keys {:subject {:confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                         hl7-fhir-r4-core.Group/schema}}},
+                :participant {:type zen/vector,
+                              :every {:type zen/map,
+                                      :keys {:role {:type zen/vector,
+                                                    :every {:type zen/map,
+                                                            :keys {:coding {:type zen/vector,
+                                                                            :slicing {:slices {}}}}}},
+                                             :member {:type zen/map,
+                                                      :require #{:reference},
+                                                      :confirms #{zen.fhir/Reference},
+                                                      :zen.fhir/reference {:refers #{hl7-fhir-r4-core.CareTeam/schema
+                                                                                     hl7-fhir-r4-core.Patient/schema
+                                                                                     hl7-fhir-r4-core.PractitionerRole/schema
+                                                                                     hl7-fhir-r4-core.Organization/schema
+                                                                                     hl7-fhir-r4-core.Practitioner/schema
+                                                                                     hl7-fhir-r4-core.RelatedPerson/schema}}},
+                                             :onBehalfOf {:confirms #{zen.fhir/Reference},
+                                                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Organization/schema}}}},
+                                      :require #{:member}},
+                              :minItems 1},
+                :managingOrganization {:type zen/vector,
+                                       :every {:confirms #{zen.fhir/Reference},
+                                               :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Organization/schema}}}}},
+         :zen.fhir/type "CareTeam"}}

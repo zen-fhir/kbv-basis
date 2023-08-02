@@ -1,0 +1,30 @@
+{ns kbv-basis.KBV-PR-Base-Observation-Body-Height,
+ import #{zen.fhir
+          hl7-fhir-r4-core.Group
+          hl7-fhir-r4-core.RelatedPerson
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.Practitioner
+          hl7-fhir-r4-core.Organization},
+ schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen/desc "Dieses Profil beschreibt die Messung einer einzelnen Körpergröße bzw. Körperlänge.",
+         :zen.fhir/type "Observation",
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Observation_Body_Height",
+         :zen.fhir/version "0.6.30-7",
+         :confirms #{zen.fhir/Resource},
+         :type zen/map,
+         :keys {:code {:type zen/map, :require #{:coding}},
+                :subject {:confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                         hl7-fhir-r4-core.Group/schema}}},
+                :effective {:fhir/polymorphic true, :type zen/map},
+                :value {:type zen/map,
+                        :keys {:Quantity {:type zen/map,
+                                          :keys {:unit {:match "cm"}}}}},
+                :note {:type zen/map,
+                       :keys {:author {:fhir/polymorphic true,
+                                       :type zen/map,
+                                       :keys {:Reference {:confirms #{zen.fhir/Reference},
+                                                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                                                         hl7-fhir-r4-core.Organization/schema
+                                                                                         hl7-fhir-r4-core.Practitioner/schema
+                                                                                         hl7-fhir-r4-core.RelatedPerson/schema}}}}}}}}}}

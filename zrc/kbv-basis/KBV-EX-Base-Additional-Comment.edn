@@ -1,0 +1,9 @@
+{ns kbv-basis.KBV-EX-Base-Additional-Comment,
+ import #{zen.fhir hl7-fhir-r4-core.string},
+ schema {:zen/tags #{zen.fhir/extension
+                     zen/schema
+                     zen.fhir/structure-schema},
+         :zen.fhir/type "string",
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Additional_Comment",
+         :zen.fhir/version "0.6.30-7",
+         :confirms #{hl7-fhir-r4-core.string/schema}}}

@@ -1,0 +1,55 @@
+{ns kbv-basis.KBV-PR-Base-Observation-Blood-Pressure,
+ import #{zen.fhir
+          hl7-fhir-r4-core.Group
+          hl7-fhir-r4-core.RelatedPerson
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.Practitioner
+          hl7-fhir-r4-core.Organization},
+ schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen/desc "Dieses Profil beschreibt die Messung eines einzelnen Blutdrucks.",
+         :zen.fhir/type "Observation",
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Observation_Blood_Pressure",
+         :zen.fhir/version "0.6.30-7",
+         :confirms #{zen.fhir/Resource},
+         :type zen/map,
+         :keys {:code {:type zen/map,
+                       :keys {:coding {:type zen/vector,
+                                       :slicing {:slices {"loinc" {:schema {:type zen/vector,
+                                                                            :minItems 1,
+                                                                            :maxItems 1,
+                                                                            :every {:type zen/map,
+                                                                                    :require #{:system
+                                                                                               :code
+                                                                                               :display
+                                                                                               :version}}},
+                                                                   :filter {:engine :match,
+                                                                            :match {:system "http://loinc.org",
+                                                                                    :version "2.73",
+                                                                                    :code "85354-9",
+                                                                                    :display "Blood pressure panel with all children optional"}}},
+                                                          "snomed" {:schema {:type zen/vector,
+                                                                             :minItems 1,
+                                                                             :maxItems 1,
+                                                                             :every {:type zen/map,
+                                                                                     :require #{:system
+                                                                                                :code
+                                                                                                :display
+                                                                                                :version}}},
+                                                                    :filter {:engine :match,
+                                                                             :match {:system "http://snomed.info/sct",
+                                                                                     :version "http://snomed.info/sct/900000000000207008/version/20230131",
+                                                                                     :code "75367002",
+                                                                                     :display "Blood pressure (observable entity)"}}}}}}},
+                       :require #{:coding}},
+                :subject {:confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                         hl7-fhir-r4-core.Group/schema}}},
+                :effective {:fhir/polymorphic true, :type zen/map},
+                :note {:type zen/map,
+                       :keys {:author {:fhir/polymorphic true,
+                                       :type zen/map,
+                                       :keys {:Reference {:confirms #{zen.fhir/Reference},
+                                                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                                                         hl7-fhir-r4-core.Organization/schema
+                                                                                         hl7-fhir-r4-core.Practitioner/schema
+                                                                                         hl7-fhir-r4-core.RelatedPerson/schema}}}}}}}}}}

@@ -1,0 +1,15 @@
+{ns kbv-basis.KBV-EX-Base-Goal-Medication-Target-Reference,
+ import #{zen.fhir},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{zen.fhir/Reference},
+         :zen/tags #{zen.fhir/extension
+                     zen/schema
+                     zen.fhir/structure-schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Goal_Medication_Target_Reference",
+         :zen.fhir/reference {:refers #{}},
+         :require #{:reference},
+         :type zen/map,
+         :zen/desc "Diese Extension dient der Referenz auf ein Behandlungsziel.",
+         :fhir/flags #{:MS},
+         :keys {:reference {:fhir/flags #{:MS}}},
+         :zen.fhir/type "Reference"}}

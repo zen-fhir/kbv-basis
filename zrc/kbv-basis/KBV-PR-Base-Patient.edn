@@ -1,0 +1,46 @@
+{ns kbv-basis.KBV-PR-Base-Patient,
+ import #{zen.fhir
+          kbv-basis.value-set.KBV-VS-Base-Deuev-Anlage-8
+          hl7-fhir-r4-core.Patient
+          kbv-basis.value-set.KBV-VS-Base-CommonLanguages
+          hl7-fhir-r4-core.data-absent-reason},
+ schema {:zen.fhir/version "0.6.30-7",
+         :confirms #{hl7-fhir-r4-core.Patient/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Patient",
+         :require #{:name :birthDate},
+         :type zen/map,
+         :zen/desc "Dieses Profil bildet eine Person ab, die eine oder mehrere medizinische Leistungen in Anspruch nimmt.",
+         :keys {:address {:type zen/vector, :slicing {:slices {}}},
+                :name {:type zen/vector,
+                       :slicing {:slices {}},
+                       :minItems 1},
+                :_gender {:type zen/map,
+                          :keys {:other-amtlich {:fhir/extensionUri "http://fhir.de/StructureDefinition/gender-amtlich-de|1.4.0"}}},
+                :_birthDate {:type zen/map,
+                             :keys {:data-absent-reason {:confirms #{hl7-fhir-r4-core.data-absent-reason/schema},
+                                                         :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+                                                         :type zen/map,
+                                                         :keys {:value {:fhir/polymorphic true,
+                                                                        :type zen/map,
+                                                                        :keys {:Code {:const {:value "unknown"}}}}}}}},
+                :communication {:type zen/vector,
+                                :every {:type zen/map,
+                                        :keys {:language {:zen.fhir/value-set {:symbol kbv-basis.value-set.KBV-VS-Base-CommonLanguages/value-set,
+                                                                               :strength :preferred},
+                                                          :zen/desc "Bevorzugte Sprache"}}}},
+                :maritalStatus {:type zen/map,
+                                :keys {:coding {:type zen/vector,
+                                                :every {:type zen/map,
+                                                        :require #{:system
+                                                                   :code
+                                                                   :display}}}},
+                                :zen/desc "Personenstand"},
+                :contact {:type zen/vector,
+                          :every {:type zen/map,
+                                  :keys {:address {:type zen/map,
+                                                   :keys {:country {:zen.fhir/value-set {:symbol kbv-basis.value-set.KBV-VS-Base-Deuev-Anlage-8/value-set,
+                                                                                         :strength :extensible},
+                                                                    :zen/desc "Staat"}}}}}}},
+         :zen.fhir/type "Patient"}}

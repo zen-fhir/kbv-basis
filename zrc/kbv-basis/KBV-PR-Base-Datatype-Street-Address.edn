@@ -1,0 +1,11 @@
+{ns kbv-basis.KBV-PR-Base-Datatype-Street-Address,
+ import #{zen.fhir kbv-basis.value-set.KBV-VS-Base-Deuev-Anlage-8},
+ schema {:zen.fhir/version "0.6.30-7",
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Datatype_Street_Address",
+         :require #{:type},
+         :type zen/map,
+         :keys {:type {:match "both"},
+                :country {:zen.fhir/value-set {:symbol kbv-basis.value-set.KBV-VS-Base-Deuev-Anlage-8/value-set,
+                                               :strength :extensible}}},
+         :zen.fhir/type "Address"}}

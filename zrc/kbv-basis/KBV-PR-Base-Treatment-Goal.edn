@@ -1,0 +1,56 @@
+{ns kbv-basis.KBV-PR-Base-Treatment-Goal,
+ import #{zen.fhir
+          hl7-fhir-r4-core.Goal
+          hl7-fhir-r4-core.Group
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.Organization},
+ schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen/desc "Dieses Profil bildet ein individuelles Behandlungsziel ab.",
+         :zen.fhir/type "Goal",
+         :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Treatment_Goal",
+         :zen.fhir/version "0.6.30-7",
+         :confirms #{hl7-fhir-r4-core.Goal/schema zen.fhir/Resource},
+         :type zen/map,
+         :keys {:endDatum {:fhir/extensionUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Treatment_Goal_End|1.4.0"},
+                :description {:type zen/map,
+                              :keys {:coding {:type zen/vector,
+                                              :every {:type zen/map,
+                                                      :require #{:system
+                                                                 :code
+                                                                 :display}}}}},
+                :subject {:confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Patient/schema
+                                                         hl7-fhir-r4-core.Organization/schema
+                                                         hl7-fhir-r4-core.Group/schema}}},
+                :start {:fhir/polymorphic true, :type zen/map},
+                :target {:type zen/vector,
+                         :every {:type zen/map,
+                                 :keys {:measure {:type zen/map,
+                                                  :keys {:coding {:type zen/vector,
+                                                                  :every {:type zen/map,
+                                                                          :require #{:system
+                                                                                     :code
+                                                                                     :display}}}}},
+                                        :detail {:fhir/polymorphic true,
+                                                 :type zen/map,
+                                                 :keys {:Range {:type zen/map,
+                                                                :keys {:low {:type zen/map,
+                                                                             :keys {:system {:match "http://unitsofmeasure.org"}},
+                                                                             :require #{:value}},
+                                                                       :high {:type zen/map,
+                                                                              :keys {:system {:match "http://unitsofmeasure.org"}},
+                                                                              :require #{:value}}},
+                                                                :require #{:high
+                                                                           :low}},
+                                                        :Ratio {:type zen/map,
+                                                                :keys {:numerator {:type zen/map,
+                                                                                   :keys {:system {:match "http://unitsofmeasure.org"}},
+                                                                                   :require #{:value}},
+                                                                       :denominator {:type zen/map,
+                                                                                     :keys {:system {:match "http://unitsofmeasure.org"}},
+                                                                                     :require #{:value}}}},
+                                                        :Quantity {:type zen/map,
+                                                                   :keys {:system {:match "http://unitsofmeasure.org"}},
+                                                                   :require #{:value}}}}},
+                                 :require #{:measure}}},
+                :note {:type zen/vector, :maxItems 1}}}}
