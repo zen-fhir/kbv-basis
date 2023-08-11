@@ -3,7 +3,7 @@
  schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/type "ContactPoint",
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Datatype_Contactpoint",
-         :zen.fhir/version "0.6.30-13",
+         :zen.fhir/version "0.6.30-14",
          :confirms #{hl7-fhir-r4-core.ContactPoint/schema},
          :type zen/map,
          :require #{:system :value}}}
