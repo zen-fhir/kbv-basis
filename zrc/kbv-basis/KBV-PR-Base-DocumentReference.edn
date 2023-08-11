@@ -12,7 +12,7 @@
          :zen/desc "Hier kann auf ein externes Dokument verwiesen und/oder ein Dokument angehängt werden.",
          :zen.fhir/type "DocumentReference",
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_DocumentReference",
-         :zen.fhir/version "0.6.30-7",
+         :zen.fhir/version "0.6.30-10",
          :confirms #{hl7-fhir-r4-core.DocumentReference/schema
                      zen.fhir/Resource},
          :type zen/map,

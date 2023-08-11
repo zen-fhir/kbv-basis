@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "Dieses Valueset enthält die Codes zur Beschreibung von medicine-route-of-administration.",
-            :zen.fhir/version "0.6.30-7",
+            :zen.fhir/version "0.6.30-10",
             :fhir/code-systems #{{:fhir/url "http://standardterms.edqm.eu",
                                   :zen.fhir/content :bundled}},
             :uri "https://fhir.kbv.de/ValueSet/KBV_VS_Base_Medicine_Route_Of_Administration",

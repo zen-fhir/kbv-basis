@@ -3,7 +3,7 @@
           hl7-fhir-r4-core.PractitionerRole
           hl7-fhir-r4-core.Practitioner
           hl7-fhir-r4-core.Organization},
- schema {:zen.fhir/version "0.6.30-7",
+ schema {:zen.fhir/version "0.6.30-10",
          :confirms #{hl7-fhir-r4-core.PractitionerRole/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},

@@ -2,7 +2,7 @@
  import #{kbv-basis.value-set.KBV-VS-Base-Medication-Type
           zen.fhir
           hl7-fhir-r4-core.CodeableConcept},
- schema {:zen.fhir/version "0.6.30-7",
+ schema {:zen.fhir/version "0.6.30-10",
          :confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
          :zen/tags #{zen.fhir/extension
                      zen/schema

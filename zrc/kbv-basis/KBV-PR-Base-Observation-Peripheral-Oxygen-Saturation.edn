@@ -5,7 +5,7 @@
           hl7-fhir-r4-core.Patient
           hl7-fhir-r4-core.Practitioner
           hl7-fhir-r4-core.Organization},
- schema {:zen.fhir/version "0.6.30-7",
+ schema {:zen.fhir/version "0.6.30-10",
          :confirms #{zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Observation_Peripheral_Oxygen_Saturation",
