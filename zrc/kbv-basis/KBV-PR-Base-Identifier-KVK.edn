@@ -1,6 +1,6 @@
 {ns kbv-basis.KBV-PR-Base-Identifier-KVK,
  import #{zen.fhir hl7-fhir-r4-core.Identifier},
- schema {:zen.fhir/version "0.6.30-10",
+ schema {:zen.fhir/version "0.6.30-11",
          :confirms #{hl7-fhir-r4-core.Identifier/schema},
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Identifier_KVK",
