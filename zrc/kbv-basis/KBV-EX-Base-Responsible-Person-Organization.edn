@@ -12,7 +12,7 @@
          :zen/desc "Diese Extension dient der Referenz auf eine verantwortliche Person / Einrichtung.",
          :zen.fhir/type "Reference",
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Responsible_Person_Organization",
-         :zen.fhir/version "0.6.30-12",
+         :zen.fhir/version "0.6.30-13",
          :confirms #{zen.fhir/Reference},
          :zen.fhir/reference {:refers #{kbv-basis.KBV-PR-Base-Practitioner/schema
                                         hl7-fhir-r4-core.PractitionerRole/schema

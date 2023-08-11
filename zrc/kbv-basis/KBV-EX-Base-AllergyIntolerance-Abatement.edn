@@ -5,5 +5,5 @@
                      zen.fhir/structure-schema},
          :zen.fhir/type "dateTime",
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_AllergyIntolerance_Abatement",
-         :zen.fhir/version "0.6.30-12",
+         :zen.fhir/version "0.6.30-13",
          :confirms #{hl7-fhir-r4-core.dateTime/schema}}}

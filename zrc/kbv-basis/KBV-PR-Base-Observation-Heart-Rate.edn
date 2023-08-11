@@ -9,7 +9,7 @@
          :zen/desc "Dieses Profil beschreibt die Messung einer einzelnen Herzfrequenz.",
          :zen.fhir/type "Observation",
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Observation_Heart_Rate",
-         :zen.fhir/version "0.6.30-12",
+         :zen.fhir/version "0.6.30-13",
          :confirms #{zen.fhir/Resource},
          :type zen/map,
          :keys {:code {:type zen/map,

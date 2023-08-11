@@ -1,6 +1,6 @@
 {ns kbv-basis.KBV-PR-Base-Identifier-Reisepassnummer,
  import #{zen.fhir hl7-fhir-r4-core.Identifier},
- schema {:zen.fhir/version "0.6.30-12",
+ schema {:zen.fhir/version "0.6.30-13",
          :confirms #{hl7-fhir-r4-core.Identifier/schema},
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Identifier_Reisepassnummer",

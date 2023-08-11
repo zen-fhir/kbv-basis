@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "Dieses Valueset enthält die Codes zur Beschreibung von Allergie Substanz SNOMED CT®.",
-            :zen.fhir/version "0.6.30-12",
+            :zen.fhir/version "0.6.30-13",
             :fhir/code-systems #{{:fhir/url "http://snomed.info/sct",
                                   :zen.fhir/content :not-present}},
             :uri "https://fhir.kbv.de/ValueSet/KBV_VS_Base_Allergy_Substance_SNOMED_CT",
