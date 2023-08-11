@@ -10,7 +10,7 @@
          :zen/desc "Dieses Profil beschreibt die Messung eines einzelnen Kopfumfangs.",
          :zen.fhir/type "Observation",
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Observation_Head_Circumference",
-         :zen.fhir/version "0.6.30-11",
+         :zen.fhir/version "0.6.30-12",
          :confirms #{zen.fhir/Resource},
          :type zen/map,
          :keys {:value {:type zen/map,

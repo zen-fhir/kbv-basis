@@ -13,7 +13,7 @@
           hl7-fhir-r4-core.MedicationStatement
           hl7-fhir-r4-core.Medication
           hl7-fhir-r4-core.Organization},
- schema {:zen.fhir/version "0.6.30-11",
+ schema {:zen.fhir/version "0.6.30-12",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4-core.MedicationStatement/schema},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
