@@ -8,7 +8,7 @@
          :zen/desc "Dieses Profil bildet ein individuelles Behandlungsziel ab.",
          :zen.fhir/type "Goal",
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Treatment_Goal",
-         :zen.fhir/version "0.6.30-14",
+         :zen.fhir/version "0.6.31",
          :confirms #{hl7-fhir-r4-core.Goal/schema zen.fhir/Resource},
          :type zen/map,
          :keys {:endDatum {:fhir/extensionUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Treatment_Goal_End|1.4.0"},

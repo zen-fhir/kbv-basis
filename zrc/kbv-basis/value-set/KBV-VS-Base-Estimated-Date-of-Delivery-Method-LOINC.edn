@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "Dieses Valueset enthält die Codes zur Beschreibung von Geschätzter Entbindungstermin Methode LOINC®.",
-            :zen.fhir/version "0.6.30-14",
+            :zen.fhir/version "0.6.31",
             :fhir/code-systems #{{:fhir/url "http://loinc.org",
                                   :zen.fhir/content :bundled}},
             :uri "https://fhir.kbv.de/ValueSet/KBV_VS_Base_Estimated_Date_of_Delivery_Method_LOINC",
