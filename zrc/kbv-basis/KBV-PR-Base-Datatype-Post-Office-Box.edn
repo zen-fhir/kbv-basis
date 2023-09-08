@@ -1,6 +1,6 @@
 {ns kbv-basis.KBV-PR-Base-Datatype-Post-Office-Box,
  import #{zen.fhir kbv-basis.value-set.KBV-VS-Base-Deuev-Anlage-8},
- schema {:zen.fhir/version "0.6.31",
+ schema {:zen.fhir/version "0.6.32",
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Datatype_Post_Office_Box",
          :require #{:type},

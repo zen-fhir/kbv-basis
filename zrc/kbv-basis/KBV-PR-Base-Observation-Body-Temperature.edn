@@ -9,7 +9,7 @@
          :zen/desc "Dieses Profil beschreibt die Messung einer einzelnen Körpertemperatur.",
          :zen.fhir/type "Observation",
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Observation_Body_Temperature",
-         :zen.fhir/version "0.6.31",
+         :zen.fhir/version "0.6.32",
          :confirms #{zen.fhir/Resource},
          :type zen/map,
          :keys {:code {:type zen/map,

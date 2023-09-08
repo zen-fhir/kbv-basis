@@ -1,6 +1,6 @@
 {ns kbv-basis.KBV-PR-Base-Datatype-Name,
  import #{zen.fhir},
- schema {:zen.fhir/version "0.6.31",
+ schema {:zen.fhir/version "0.6.32",
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_PR_Base_Datatype_Name",
          :require #{:family :use},

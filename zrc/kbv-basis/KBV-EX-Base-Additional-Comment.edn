@@ -5,5 +5,5 @@
                      zen.fhir/structure-schema},
          :zen.fhir/type "string",
          :zen.fhir/profileUri "https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Additional_Comment",
-         :zen.fhir/version "0.6.31",
+         :zen.fhir/version "0.6.32",
          :confirms #{hl7-fhir-r4-core.string/schema}}}

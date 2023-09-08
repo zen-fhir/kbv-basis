@@ -1,6 +1,6 @@
 {ns kbv-basis.KBV-PR-Base-Medication,
  import #{zen.fhir hl7-fhir-r4-core.Medication},
- schema {:zen.fhir/version "0.6.31",
+ schema {:zen.fhir/version "0.6.32",
          :confirms #{hl7-fhir-r4-core.Medication/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
